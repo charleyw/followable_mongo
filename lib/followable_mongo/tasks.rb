@@ -35,11 +35,7 @@ module Mongo
         count = doc.follower_ids.length
         query = {:_id => doc.id}
         update = {'$set' => {'follows.count' => count}}
-        doc = doc.class.followable_collection.find_and_modify(
-              :query => query,
-              :update => update,
-              :new => false
-        )
+        doc = doc.class.followable_collection.find_one_and_update(query, update)
       end
 
       private_class_method  :remake_stats_for,

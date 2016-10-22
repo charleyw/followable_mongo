@@ -18,6 +18,7 @@ module Mongo
       FOLLOWABLE << self.name
 
       include ::Mongo::Followable::Following
+      include InstanceMethods
 
       if defined?(Mongoid) && defined?(field)
         include ::Mongo::Followable::Integrations::Mongoid
@@ -31,7 +32,7 @@ module Mongo
       }
 
       followable_index({'follows.followers': 1, '_id': 1}, {:unique => true})
-      followable_index {'follows.count': -1}
+      followable_index({'follows.count': -1})
     end
 
     module ClassMethods

@@ -3,6 +3,7 @@ module Mongo
     extend ActiveSupport::Concern
 
     included do
+      include InstanceMethods
       scope :following, lambda { |followed| where(:_id => { '$in' =>  followed.follower_ids }) }
     end
 

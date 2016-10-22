@@ -11,14 +11,14 @@ module Mongo
             alias_method :followable_index, :index
           end
         end
-        
+
         module ClassMethods
           def followable_relation(class_name)
             relations.find{ |x, r| r.class_name == class_name }.try(:last)
           end
 
           def followable_collection
-            collection.master.collection
+            collection
           end
 
           def followable_foreign_key(metadata)
